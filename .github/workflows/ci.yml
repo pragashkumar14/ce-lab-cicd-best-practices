@@ -26,7 +26,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: hashicorp/setup-terraform@v3
         with:
-          terraform_version: 1.6.0
+          terraform_version: 1.15.8
       - name: Check formatting
         run: terraform fmt -check -recursive -diff
 
@@ -40,7 +40,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: hashicorp/setup-terraform@v3
         with:
-          terraform_version: 1.6.0
+          terraform_version: 1.15.8
       - uses: actions/cache@v4
         with:
           path: |
@@ -73,7 +73,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: hashicorp/setup-terraform@v3
         with:
-          terraform_version: 1.6.0
+          terraform_version: 1.15.8
       - uses: actions/cache@v4
         with:
           path: |
