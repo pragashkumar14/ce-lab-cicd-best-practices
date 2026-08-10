@@ -76,7 +76,7 @@ resource "aws_s3_bucket_lifecycle_configuration" "artifacts" {
 }
 
 resource "aws_dynamodb_table" "app_state" {
-  name         = "${var.project_name}-app-state"
+  name         = "${var.project_name}-app-state-${random_id.suffix.hex}"
   billing_mode = "PAY_PER_REQUEST"
   hash_key     = "PK"
   range_key    = "SK"
