@@ -9,7 +9,7 @@ on:
 permissions:
   contents: read
 
-  concurrency:
+concurrency:
   group: production-deploy
   cancel-in-progress: false
 
