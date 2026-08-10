@@ -42,10 +42,20 @@ git push origin main
 
 ## Lessons Learned
 
-_What went well? What could be improved? Were the CI/CD checks sufficient to catch this earlier?_
+### What went well
+
+- _e.g., CI pipeline caught the issue before deploy_
+- _e.g., Rollback procedure worked as documented_
+
+### What went wrong
+
+- _e.g., Missing validation for edge case_
+- _e.g., No alerting on the affected resource_
 
 ## Action Items
 
-| Action | Owner | Status |
-|--------|-------|--------|
-| e.g., Add validation for X | @github-username | Open / In Progress / Done |
+| Action | Owner | Due Date | Status |
+|--------|-------|----------|--------|
+| Add validation for X | @username | YYYY-MM-DD | Open |
+| Update monitoring for Y | @username | YYYY-MM-DD | Open |
+| Add test case for Z | @username | YYYY-MM-DD | Open |
