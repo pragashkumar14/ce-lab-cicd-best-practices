@@ -9,6 +9,10 @@ on:
 permissions:
   contents: read
 
+  concurrency:
+  group: production-deploy
+  cancel-in-progress: false
+
 jobs:
   plan:
     name: Plan (Pre-Deploy)
