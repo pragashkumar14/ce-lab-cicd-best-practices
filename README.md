@@ -1,112 +1,43 @@
-# Lab M5.10 - CI/CD Best Practices Implementation
+# CI/CD Best Practices — Terraform Infrastructure
 
-**Cloud Engineering Bootcamp - Week 5, Day 5**  
-**Module:** Cloud Automation & CI/CD
+![CI Pipeline](https://github.com/pragashkumar14/ce-lab-cicd-best-practices/actions/workflows/ci.yml/badge.svg)
+![CD Pipeline](https://github.com/pragashkumar14/ce-lab-cicd-best-practices/actions/workflows/cd.yml/badge.svg)
+![Commit Lint](https://github.com/pragashkumar14/ce-lab-cicd-best-practices/actions/workflows/commit-lint.yml/badge.svg)
+![Release](https://github.com/pragashkumar14/ce-lab-cicd-best-practices/actions/workflows/release.yml/badge.svg)
 
-## Start Here: Fork, Clone, and Submit    
+## Architecture
 
-You will complete this lab by working in **your own fork** of the lab repository and submitting a **Pull Request (PR)**.
+This repository manages shared infrastructure resources:
+- **S3 Bucket** — Versioned artifact storage with encryption and lifecycle policies
+- **DynamoDB Table** — Application state store with point-in-time recovery
 
-1. **Fork the lab repository** to your GitHub account.
-2. **Clone your fork** locally:
-   ```bash
-   git clone https://github.com/<your-github-username>/ce-lab-cicd-best-practices.git
-   cd ce-lab-cicd-best-practices
-   ```
-3. **Follow all instructions below** and save your work in this repo (files, screenshots, and notes).
-4. **When finished, submit your work:**
-   - `git add` → `git commit` → `git push`
-   - Open a **Pull Request** from your fork back to the original lab repo
-   - Copy the **PR URL** and paste it into the **Lab Submission** field in the Student Portal
+## CI/CD Workflows
 
-## 📋 Lab Overview
+| Workflow | Trigger | Purpose |
+|----------|---------|---------|
+| CI Pipeline | PR to `main` | Format, validate, security scan, plan |
+| CD Pipeline | Push to `main` | Plan + deploy with manual approval |
+| Commit Lint | PR open/edit | Enforce conventional commit titles |
+| Release Please | Push to `main` | Automated versioning and changelog |
 
-Implement comprehensive CI/CD best practices including testing, security, monitoring, and documentation to create a production-ready pipeline.
+## Environment Protection
 
-## 🎯 Learning Objectives
+The `production` environment requires:
+- **Required reviewer approval** before `terraform apply` runs
+- **5-minute wait timer** after approval, before deployment proceeds
 
-- Implement comprehensive testing in pipelines
-- Configure security scanning and compliance checks
-- Set up monitoring and alerting
-- Implement audit logging
-- Document CI/CD processes
-- Follow industry best practices
+## Prerequisites
 
-## 📁 Repository Structure
+- Terraform `>= 1.15.8`
+- AWS credentials configured as repository secrets:
+  - `AWS_ACCESS_KEY_ID`
+  - `AWS_SECRET_ACCESS_KEY`
 
+## Quick Start
+
+```bash
+cd terraform
+terraform init
+terraform plan
+terraform apply
 ```
-ce-lab-cicd-best-practices/
-├── .github/
-│   └── workflows/
-│       ├── comprehensive-ci.yml
-│       ├── security-scan.yml
-│       ├── compliance-check.yml
-│       └── monitoring.yml
-├── docs/
-│   ├── PIPELINE.md
-│   ├── SECURITY.md
-│   └── RUNBOOK.md
-├── tests/
-├── README.md
-└── .gitignore
-```
-
-## ✅ Submission Requirements
-
-1. **Comprehensive CI/CD Pipeline**
-   - Multi-stage testing (unit, integration, e2e)
-   - Security scanning (SAST, dependency check)
-   - Compliance validation
-   - Automated deployment
-
-2. **Security Implementation**
-   - Vulnerability scanning
-   - Secret scanning
-   - Code quality checks
-   - License compliance
-
-3. **Monitoring & Observability**
-   - Pipeline metrics
-   - Deployment notifications
-   - Error alerting
-
-4. **Documentation**
-   - Pipeline architecture diagram
-   - Runbooks and troubleshooting guides
-   - Security and compliance documentation
-
-## 🎓 Grading Rubric
-
-| Criteria | Points |
-|----------|--------|
-| **Pipeline Completeness** | 30 |
-| **Security Implementation** | 25 |
-| **Monitoring & Alerts** | 20 |
-| **Documentation** | 25 |
-| **Total** | 100 |
-
-## 💡 Tips
-
-- Start with a working pipeline, then add features
-- Implement security checks early
-- Document as you build
-- Use pipeline templates for consistency
-- Monitor pipeline metrics continuously
-
-## 📚 Resources
-
-- [GitHub Actions Security Best Practices](https://docs.github.com/en/actions/security-guides)
-- [CI/CD Best Practices](https://about.gitlab.com/topics/ci-cd/ci-cd-best-practices/)
-- [OWASP CI/CD Security](https://owasp.org/www-project-devsecops-guideline/)
-
-## 🚀 Submission
-
-Complete the lab as described in the instructions and save your work in this repo (files, screenshots, notes, etc.).
-
-**Reminder:** After pushing your work and opening a PR:
-- Copy the **PR URL**
-- Paste it into the **Lab Submission** field in the Student Portal
-
----
-
-**Congratulations!** This is the final lab of Week 5. You've learned comprehensive CI/CD automation practices that are essential for modern cloud engineering. Apply these practices in all your future projects!
